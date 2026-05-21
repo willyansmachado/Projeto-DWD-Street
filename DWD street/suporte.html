@@ -1,0 +1,44 @@
+<main class="container">
+    <h2 class="title-page">SUPORTE AO CLIENTE</h2>
+    <div class="support-grid">
+        <div class="support-form">
+            <input type="text" placeholder="Nome Completo" class="std-input">
+            <input type="text" placeholder="Assunto" class="std-input">
+            <textarea placeholder="Como podemos ajudar?" class="std-input"></textarea>
+            <button class="btn-shop">ENVIAR MENSAGEM</button>
+        </div>
+        <div class="support-info">
+            <h4>Canais Oficiais</h4>
+            <p>📧 dwd_street@estudante.sesisenai.org.br</p>
+            <p>📍 Joinville, SC</p>
+            <a href="https://wa.me/554799999999" class="btn-zap">CHAMAR NO WHATSAPP</a>
+        </div>
+    </div>
+</main>
+<button id="theme-toggle" class="theme-toggle">🌙</button>
+
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        if (themeToggleBtn) {
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
+                themeToggleBtn.textContent = '☀️'; 
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggleBtn.textContent = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggleBtn.textContent = '🌙';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
