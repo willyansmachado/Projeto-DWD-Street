@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos | DWD Street</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
@@ -13,24 +14,29 @@
         
         <div class="product-grid">
             <div class="product-card">
-                <div class="product-img"><img src="assets/img/camiseta_banner.png"></div>
+                <div class="product-img"><img src="assets/img/camiseta_banner.png" alt="Camiseta DWD Classic"></div>
                 <div class="product-info">
                     <h3>Camiseta DWD Classic</h3>
                     <p class="price">R$ 119,90</p>
                     <button class="add-to-cart-btn">COMPRAR</button>
                 </div>
             </div>
-            </div>
+        </div>
     </main>
     <button id="theme-toggle" class="theme-toggle">🌙</button>
 
     <script>
+        // MODO ESCURO - VERIFICAÇÃO IMEDIATA (Faz o tema persistir entre as páginas)
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
         const themeToggleBtn = document.getElementById('theme-toggle');
         const body = document.body;
 
         if (themeToggleBtn) {
-            if (localStorage.getItem('theme') === 'dark') {
-                body.classList.add('dark-mode');
+            // Ajusta o emoji do botão se já iniciou em dark-mode
+            if (body.classList.contains('dark-mode')) {
                 themeToggleBtn.textContent = '☀️'; 
             }
 

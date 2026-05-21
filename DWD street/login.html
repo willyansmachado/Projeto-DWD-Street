@@ -27,12 +27,17 @@
     <button id="theme-toggle" class="theme-toggle">🌙</button>
 
     <script>
+        // MODO ESCURO - VERIFICAÇÃO IMEDIATA (Faz o tema persistir entre as páginas)
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
         const themeToggleBtn = document.getElementById('theme-toggle');
         const body = document.body;
 
         if (themeToggleBtn) {
-            if (localStorage.getItem('theme') === 'dark') {
-                body.classList.add('dark-mode');
+            // Ajusta o emoji do botão se já iniciou em dark-mode
+            if (body.classList.contains('dark-mode')) {
                 themeToggleBtn.textContent = '☀️'; 
             }
 

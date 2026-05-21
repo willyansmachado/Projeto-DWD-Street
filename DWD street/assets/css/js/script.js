@@ -1,32 +1,14 @@
-// ==========================================
-// LÓGICA DO CARRINHO DE COMPRAS
-// ==========================================
-let totalCart = 0;
-const cartCount = document.getElementById('cart-count');
-const addButtons = document.querySelectorAll('.add-to-cart-btn');
-
-addButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        totalCart++;
-        cartCount.innerText = totalCart;
-        
-        // Feedback visual tipo "Toast"
-        console.log("Item adicionado ao carrinho tricolor!");
-    });
-});
-
-// ==========================================
+// ==========================================================================
 // EVENTOS QUE RODAM QUANDO A PÁGINA CARREGA
-// ==========================================
+// ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     
-    // ------------------------------------------
+    // ----------------------------------------------------------------------
     // 1. MODO ESCURO
-    // ------------------------------------------
+    // ----------------------------------------------------------------------
     const themeToggleBtn = document.getElementById('theme-toggle');
     const body = document.body;
 
-    // Se o botão não existir na página, o script para aqui para não dar erro
     if (themeToggleBtn) {
         // Verifica o que está salvo no LocalStorage
         if (localStorage.getItem('theme') === 'dark') {
@@ -48,28 +30,85 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ------------------------------------------
+    // ----------------------------------------------------------------------
     // 2. CARROSSEL DE BANNERS DA HOME
-    // ------------------------------------------
+    // ----------------------------------------------------------------------
     const slides = document.querySelectorAll('.slide');
     let currentSlide = 0;
 
-    // Só executa se encontrar banners na página (ou seja, se estiver na Home)
     if (slides.length > 0) {
         setInterval(() => {
-            // Remove a classe 'active' do banner atual (esconde ele)
             slides[currentSlide].classList.remove('active');
-            
-            // Vai para o próximo banner
             currentSlide++;
             
-            // Se chegou no final, volta pro primeiro
             if (currentSlide >= slides.length) {
                 currentSlide = 0;
             }
             
-            // Adiciona a classe 'active' no novo banner (mostra ele)
             slides[currentSlide].classList.add('active');
-        }, 4000); // 4000 = troca a foto a cada 4 segundos
+        }, 4000);
     }
+
+    // ----------------------------------------------------------------------
+    // 3. LÓGICA DO CARRINHO COM TRAVA DE LOGIN
+    // ----------------------------------------------------------------------
+    const cartCountElement = document.getElementById('cart-count');
+    
+    // Função para atualizar o visual da bolinha (Badge) do carrinho
+    function atualizarBadge() {
+        if (!cartCountElement) return; // Segurança caso o elemento sumisse
+        
+        let qtdAtual = parseInt(localStorage.getItem('cart_total_items')) || 0;
+        
+        if (qtdAtual > 0) {
+            cartCountElement.textContent = qtdAtual;
+            cartCountElement.style.display = 'flex';
+        } else {
+            cartCountElement.style.display = 'none';
+        }
+    }
+
+    // Inicializa o contador na barra de navegação ao carregar a página
+    atualizarBadge();
+
+    // Seleciona todos os botões de compra possíveis (.auth-btn e .add-to-cart-btn)
+    const botoesComprar = document.querySelectorAll('.auth-btn, .add-to-cart-btn');
+
+    botoesComprar.forEach(botao => {
+        botao.addEventListener('click', (evento) => {
+            evento.preventDefault(); // Previne comportamentos inesperados do botão
+
+            // CRUCIAL: Verifica se o usuário está logado
+            const estaLogado = localStorage.getItem('usuario_logado');
+
+            if (!estaLogado || estaLogado !== 'true') {
+                // Barra a compra e avisa o cliente
+                alert('Ops! Você precisa estar logado para adicionar itens ao carrinho. 🛒');
+                
+                // Redireciona na hora para a página de login
+                window.location.href = 'login.html';
+                return; // Encerra a função aqui para impedir que adicione o item
+            }
+
+            // SE PASSOU PELA TRAVA: Executa a compra normalmente
+            let qtdAtual = parseInt(localStorage.getItem('cart_total_items')) || 0;
+            qtdAtual += 1;
+            localStorage.setItem('cart_total_items', qtdAtual);
+            
+            // Atualiza a bolinha de notificação imediatamente
+            atualizarBadge();
+            
+            // Feedback visual no console e no botão
+            console.log("Item adicionado ao carrinho tricolor!");
+            
+            const textoOriginal = botao.textContent;
+            botao.textContent = "Adicionado! ✓";
+            botao.style.backgroundColor = "#28a745";
+            
+            setTimeout(() => {
+                botao.textContent = textoOriginal;
+                botao.style.backgroundColor = ""; 
+            }, 1500);
+        });
+    });
 });

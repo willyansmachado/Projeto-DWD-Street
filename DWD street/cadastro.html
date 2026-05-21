@@ -17,7 +17,7 @@
                 <input type="text" placeholder="Nome" class="auth-input" required>
                 <input type="text" placeholder="Sobrenome" class="auth-input" required>
             </div>
-            <input type="text" placeholder="CPF (Somente números)" class="auth-input" required>
+            <input type="text" placeholder="CPF (Somente numbers)" class="auth-input" required>
             <input type="email" placeholder="Seu melhor e-mail" class="auth-input" required>
             <input type="password" placeholder="Crie uma senha" class="auth-input" required>
             <input type="password" placeholder="Confirme a senha" class="auth-input" required>
@@ -33,12 +33,17 @@
     <button id="theme-toggle" class="theme-toggle">🌙</button>
 
     <script>
+        // MODO ESCURO - VERIFICAÇÃO IMEDIATA (Faz o tema persistir entre as páginas)
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
         const themeToggleBtn = document.getElementById('theme-toggle');
         const body = document.body;
 
         if (themeToggleBtn) {
-            if (localStorage.getItem('theme') === 'dark') {
-                body.classList.add('dark-mode');
+            // Ajusta o emoji do botão se já iniciou em dark-mode
+            if (body.classList.contains('dark-mode')) {
                 themeToggleBtn.textContent = '☀️'; 
             }
 

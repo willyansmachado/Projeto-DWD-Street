@@ -27,19 +27,22 @@
 }
 
 .mega-menu {
-    position: absolute; top: 80px; left: 0; width: 100%; 
-    background: white; display: none; /* Escondido por padrão */
-    grid-template-columns: repeat(4, 1fr); padding: 40px 10%;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-top: 1px solid #eee;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background: white;
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 40px 10%;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-top: 1px solid #eee;
 }
 
-.has-mega:hover .mega-menu { display: grid; } /* Mostra ao passar o mouse */
-
-.mega-col h4 { border-bottom: 2px solid var(--red); margin-bottom: 15px; padding-bottom: 5px; font-size: 0.9rem; }
-.mega-col ul { list-style: none; }
-.mega-col ul li a { text-decoration: none; color: #555; font-size: 0.85rem; line-height: 2.5; transition: 0.3s; }
-.mega-col ul li a:hover { color: var(--red); padding-left: 5px; }
-
+/* REMOVE o hover */
+.has-mega.active .mega-menu {
+    display: grid;
+}
 /* =========================================
    BANNER PRINCIPAL (ESTILO BLOCK CORE / JEC)
    ========================================= */
@@ -150,14 +153,210 @@
 .title-page { text-align: center; font-weight: 900; margin-bottom: 40px; text-transform: uppercase; }
 .bg-light { background-color: #f9f9f9; }
 
-/* Estilo Carrinho */
-.cart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; }
-.cart-item { background: white; padding: 20px; display: flex; align-items: center; gap: 20px; border-bottom: 1px solid #eee; }
-.cart-item img { width: 80px; border-radius: 5px; }
-.cart-summary-box { background: white; padding: 30px; border: 2px solid var(--black); height: fit-content; }
-.summary-line { display: flex; justify-content: space-between; margin-bottom: 15px; }
-.summary-total { display: flex; justify-content: space-between; font-weight: 900; font-size: 1.2rem; margin-top: 20px; border-top: 1px solid #ddd; padding-top: 15px; }
-.btn-checkout { width: 100%; background: #28a745; color: white; border: none; padding: 15px; font-weight: bold; cursor: pointer; }
+/* ==========================================================================
+   PÁGINA DE CARRINHO (DWD STREET)
+   ========================================================================== */
+
+/* Layout Geral e Grid */
+.bg-light {
+    background-color: #f9f9f9;
+    transition: background 0.3s ease;
+}
+
+.title-page {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: left;
+    letter-spacing: 1px;
+}
+
+.cart-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 30px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .cart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Card de Item do Carrinho */
+.cart-item {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    transition: background 0.3s ease;
+}
+
+.cart-item img {
+    width: 90px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 20px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+/* Ajuste de cores dos textos dos produtos */
+.item-details h4 {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin: 0 0 8px 0;
+    color: #111111; /* Cor escura garantida no modo claro */
+}
+
+.item-details p {
+    font-size: 0.9rem;
+    color: #666666;
+    margin: 0 0 10px 0;
+}
+
+.item-price {
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: #e31e24; /* Vermelho DWD */
+}
+
+/* Botão Remover */
+.remove-btn {
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    padding: 10px;
+    transition: transform 0.2s ease;
+}
+
+.remove-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Caixa de Resumo */
+.cart-summary-box {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease;
+}
+
+.cart-summary-box h3 {
+    font-weight: 900;
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 25px;
+    letter-spacing: 1px;
+    color: #111111;
+    border-bottom: 2px solid #e31e24;
+    padding-bottom: 10px;
+}
+
+/* Linhas de informação (Subtotal / Frete) */
+.summary-line {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #333333; /* Texto legível */
+}
+
+.summary-line span:first-child {
+    font-weight: 400;
+}
+
+.summary-line span:last-child {
+    font-weight: 700;
+}
+
+.summary-line .free {
+    color: #28a745; /* Verde para o Grátis */
+    font-weight: 900;
+}
+
+/* Total */
+.summary-total {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 900;
+    font-size: 1.3rem;
+    color: #111111;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    padding-top: 15px;
+    border-top: 1px dashed #dddddd;
+}
+
+/* Botão Finalizar Compra */
+.btn-checkout {
+    width: 100%;
+    background-color: #28a745; /* Verde padrão ou altere para #111 se quiser preto */
+    color: #ffffff;
+    border: none;
+    padding: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    letter-spacing: 1px;
+}
+
+.btn-checkout:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   CORREÇÃO DO MODO ESCURO (DARK MODE) PARA O CARRINHO
+   ========================================================================== */
+
+body.dark-mode {
+    background-color: #111111 !important;
+}
+
+body.dark-mode .bg-light {
+    background-color: #111111;
+}
+
+body.dark-mode .title-page {
+    color: #ffffff;
+}
+
+/* Faz os blocos ficarem escuros no Dark Mode */
+body.dark-mode .cart-item,
+body.dark-mode .cart-summary-box {
+    background-color: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Ajusta os textos internos para branco/cinza claro quando estiver no Dark Mode */
+body.dark-mode .item-details h4,
+body.dark-mode .cart-summary-box h3,
+body.dark-mode .summary-total {
+    color: #ffffff;
+}
+
+body.dark-mode .item-details p,
+body.dark-mode .summary-line {
+    color: #cccccc;
+}
+
+body.dark-mode .summary-total {
+    border-top-color: #333333;
+}
 
 /* Estilo Auth (Login/Cadastro) */
 .auth-page { 
@@ -645,3 +844,30 @@ body.dark-mode .benefits { background: #1a1a1a; }
 body.dark-mode .benefit-item p { color: #ccc; }
 body.dark-mode .product-card { background: #222; border-color: #333; }
 body.dark-mode .price, body.dark-mode .product-info h3 { color: white; }
+
+/* Bolinha de Notificação do Carrinho */
+.cart-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: #e31e24; /* Vermelho DWD */
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 0.7rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: popIn 0.3s ease-in-out;
+}
+
+/* Animaçãozinha para quando o número mudar */
+@keyframes popIn {
+    0% { transform: scale(0); }
+    80% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}

@@ -2,6 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Carrinho | DWD Street</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
@@ -27,19 +28,24 @@
                 <div class="summary-line"><span>Subtotal</span> <span>R$ 129,90</span></div>
                 <div class="summary-line"><span>Frete</span> <span class="free">GRÁTIS</span></div>
                 <div class="summary-total"><span>TOTAL</span> <span>R$ 129,90</span></div>
-                <button class="btn-checkout">FINALIZAR COMPRA</button>
+                <a href="pagamento.html" class="btn-banner">FINALIZAR COMPRA</a>
             </div>
         </div>
     </main>
     <button id="theme-toggle" class="theme-toggle">🌙</button>
 
     <script>
+        // MODO ESCURO - VERIFICAÇÃO IMEDIATA (Faz o tema persistir entre as páginas)
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
         const themeToggleBtn = document.getElementById('theme-toggle');
         const body = document.body;
 
         if (themeToggleBtn) {
-            if (localStorage.getItem('theme') === 'dark') {
-                body.classList.add('dark-mode');
+            // Ajusta o emoji do botão se já iniciou em dark-mode
+            if (body.classList.contains('dark-mode')) {
                 themeToggleBtn.textContent = '☀️'; 
             }
 

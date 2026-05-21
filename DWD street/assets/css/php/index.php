@@ -1,3 +1,27 @@
+<?php
+// SIMULAÇÃO DE BANCO DE DADOS EM PHP
+// No futuro, esses dados vão vir do seu banco MySQL automaticamente
+$produtos = [
+    [
+        "nome" => "Camisa Block Core JEC",
+        "preco" => "199,90",
+        "imagem" => "assets/css/img/produto1.png",
+        "badge" => "Novo"
+    ],
+    [
+        "nome" => "Moletom DWD Street Black",
+        "preco" => "249,90",
+        "imagem" => "assets/css/img/produto2.png",
+        "badge" => ""
+    ],
+    [
+        "nome" => "Boné Snapback DWD",
+        "preco" => "89,90",
+        "imagem" => "assets/css/img/produto3.png",
+        "badge" => ""
+    ]
+];
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -12,9 +36,7 @@
     <div class="top-bar">ENTREGA RÁPIDA EM TODA JOINVILLE | 10% OFF NA PRIMEIRA COMPRA</div>
 
     <header class="navbar">
-        
         <div class="logo">DWD<span>STREET</span></div>
-        
         <nav class="main-nav">
             <ul class="nav-links">
                 <li class="has-mega">
@@ -66,8 +88,7 @@
 
     <main>
         <section class="main-slider">
-            
-            <div class="slide active" style="background-image: url('assets/css/img/banner1.png');">
+            <div class="slide active" style="background-image: url('assets/css/img/bannerdwd.png');">
                 <div class="slide-overlay"></div>
                 <div class="banner-content">
                     <p class="subtitle">Nova linha casual</p>
@@ -75,8 +96,7 @@
                     <a href="masculino.html" class="btn-banner">VER TODOS OS MODELOS</a>
                 </div>
             </div>
-
-            <div class="slide" style="background-image: url('assets/css/img/banner4.png');">
+            <div class="slide" style="background-image: url('assets/css/img/inverno.png');">
                 <div class="slide-overlay"></div>
                 <div class="banner-content">
                     <p class="subtitle">Coleção de Inverno</p>
@@ -84,18 +104,9 @@
                     <a href="ofertas.html" class="btn-banner">APROVEITE 30% OFF</a>
                 </div>
             </div>
-
-            <div class="slide" style="background-image: url('assets/css/img/banner3.png');">
-                <div class="slide-overlay"></div>
-                <div class="banner-content">
-                    <p class="subtitle">Skate Culture</p>
-                    <h1>STREET <span>WEAR</span></h1>
-                    <a href="produtos.html" class="btn-banner">VER LANÇAMENTOS</a>
-                </div>
-            </div>
-
         </section>
     </main>
+
     <section class="benefits">
         <div class="benefit-item">
             <span class="icon">🚚</span>
@@ -124,62 +135,41 @@
         <h2 class="section-title">DESTAQUES <span>DWD</span></h2>
         
         <div class="product-grid">
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/css/img/produto1.png" alt="Produto">
-                    <span class="badge">Novo</span>
+            <?php 
+            // O PHP VARRE O ARRAY DE PRODUTOS E GERA O HTML PARA CADA UM DELES SOZINHO!
+            foreach($produtos as $produto): 
+            ?>
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="<?php echo $produto['imagem']; ?>" alt="<?php echo $produto['nome']; ?>">
+                        <?php if(!empty($produto['badge'])): ?>
+                            <span class="badge"><?php echo $produto['badge']; ?></span>
+                        <?php endif; ?>
+                    </div>
+                    <div class="product-info">
+                        <h3><?php echo $produto['nome']; ?></h3>
+                        <p class="price">R$ <?php echo $produto['preco']; ?></p>
+                        <button class="btn-add">ADICIONAR AO CARRINHO</button>
+                    </div>
                 </div>
-                <div class="product-info">
-                    <h3>Camisa Block Core JEC</h3>
-                    <p class="price">R$ 199,90</p>
-                    <button class="btn-add">ADICIONAR AO CARRINHO</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/css/img/produto2.png" alt="Produto">
-                </div>
-                <div class="product-info">
-                    <h3>Moletom DWD Street Black</h3>
-                    <p class="price">R$ 249,90</p>
-                    <button class="btn-add">ADICIONAR AO CARRINHO</button>
-                </div>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="assets/css/img/produto3.png" alt="Produto">
-                </div>
-                <div class="product-info">
-                    <h3>Boné Snapback DWD</h3>
-                    <p class="price">R$ 89,90</p>
-                    <button class="btn-add">ADICIONAR AO CARRINHO</button>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </section>
-    
+
     <button id="theme-toggle" class="theme-toggle">🌙</button>
 
     <script>
-        // MODO ESCURO - VERIFICAÇÃO IMEDIATA (Faz o tema persistir entre as páginas)
-        if (localStorage.getItem('theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-        }
-
+        // MODO ESCURO
         const themeToggleBtn = document.getElementById('theme-toggle');
         const body = document.body;
 
         if (themeToggleBtn) {
-            // Ajusta o emoji do botão se já iniciou em dark-mode
-            if (body.classList.contains('dark-mode')) {
+            if (localStorage.getItem('theme') === 'dark') {
+                body.classList.add('dark-mode');
                 themeToggleBtn.textContent = '☀️'; 
             }
-
             themeToggleBtn.addEventListener('click', () => {
                 body.classList.toggle('dark-mode');
-                
                 if (body.classList.contains('dark-mode')) {
                     localStorage.setItem('theme', 'dark');
                     themeToggleBtn.textContent = '☀️';
@@ -190,27 +180,16 @@
             });
         }
 
-        // CARROSSEL PASSANDO SOZINHO (A CADA 4 SEGUNDOS)
+        // CARROSSEL
         const slides = document.querySelectorAll('.slide');
         let currentSlide = 0;
-
         if (slides.length > 0) {
             setInterval(() => {
                 slides[currentSlide].classList.remove('active');
                 currentSlide++;
-                if (currentSlide >= slides.length) {
-                    currentSlide = 0;
-                }
+                if (currentSlide >= slides.length) { currentSlide = 0; }
                 slides[currentSlide].classList.add('active');
             }, 4000); 
-        }
-
-        // SELEÇÃO DE CATEGORIA (CLICK)
-        const botaoCategoria = document.querySelector('.has-mega');
-        if (botaoCategoria) {
-            botaoCategoria.addEventListener('click', function () {
-                botaoCategoria.classList.toggle('active');
-            });
         }
     </script>
 </body>
