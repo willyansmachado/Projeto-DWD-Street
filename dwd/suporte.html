@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte ao Cliente | DWD Street</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">DWD<span>STREET</span></a>
+        <div class="nav-icons">
+            <a href="login.html" class="icon-btn">👤</a>
+            <a href="carrinho.html" class="icon-btn">🛒</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="title-page">SUPORTE AO CLIENTE</h2>
+        <div class="support-grid">
+            <form class="support-form">
+                <input type="text" placeholder="Nome Completo" class="std-input" required>
+                <input type="text" placeholder="Assunto" class="std-input" required>
+                <textarea placeholder="Como podemos ajudar?" class="std-input" required></textarea>
+                <button type="submit" class="btn-shop">ENVIAR MENSAGEM</button>
+            </form>
+            <div class="support-info">
+                <h4>Canais Oficiais</h4>
+                <p>📧 dwd_street@estudante.sesisenai.org.br</p>
+                <p>📍 Joinville, SC</p>
+                <a href="https://wa.me/554799999999" class="btn-zap" target="_blank" rel="noopener noreferrer">CHAMAR NO WHATSAPP</a>
+            </div>
+        </div>
+    </main>
+
+    <button id="theme-toggle" class="theme-toggle">🌙</button>
+
+    <script>
+        // MODO ESCURO - VERIFICAÇÃO IMEDIATA (Faz o tema persistir entre as páginas)
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        if (themeToggleBtn) {
+            // Ajusta o emoji do botão se já iniciou em dark-mode
+            if (body.classList.contains('dark-mode')) {
+                themeToggleBtn.textContent = '☀️'; 
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggleBtn.textContent = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggleBtn.textContent = '🌙';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

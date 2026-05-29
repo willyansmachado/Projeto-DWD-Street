@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento | DWD Street</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html" class="logo">DWD<span>STREET</span></a>
+        <div class="nav-icons">
+            <a href="login.html" class="icon-btn">👤</a>
+            <a href="carrinho.html" class="icon-btn">🛒</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <h2 class="title-page">FINALIZAR PAGAMENTO</h2>
+        
+        <div class="checkout-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; padding: 20px 0;">
+            
+            <div class="checkout-form-box">
+                <form class="auth-form" onsubmit="event.preventDefault(); alert('Pagamento simulado com sucesso!');">
+                    
+                    <h3>1. Dados de Entrega</h3>
+                    <div class="auth-row" style="display: flex; gap: 10px; margin-bottom: 10px;">
+                        <input type="text" placeholder="CEP" class="auth-input" style="flex: 1;" required>
+                        <input type="text" placeholder="Número" class="auth-input" style="width: 80px;" required>
+                    </div>
+                    <input type="text" placeholder="Endereço de Entrega" class="auth-input" required>
+                    <input type="text" placeholder="Bairro" class="auth-input" required>
+                    
+                    <br>
+                    <h3>2. Forma de Pagamento</h3>
+                    
+                    <div class="payment-methods" style="display: flex; gap: 10px; margin-bottom: 20px;">
+                        <label style="flex: 1; border: 1px solid #eee; padding: 15px; text-align: center; border-radius: 8px; cursor: pointer;">
+                            <input type="radio" name="payment" value="card" checked style="margin-bottom: 8px;">
+                            <div>💳 Cartão</div>
+                        </label>
+                        <label style="flex: 1; border: 1px solid #eee; padding: 15px; text-align: center; border-radius: 8px; cursor: pointer;">
+                            <input type="radio" name="payment" value="pix" style="margin-bottom: 8px;">
+                            <div>📱 Pix</div>
+                        </label>
+                        <label style="flex: 1; border: 1px solid #eee; padding: 15px; text-align: center; border-radius: 8px; cursor: pointer;">
+                            <input type="radio" name="payment" value="boleto" style="margin-bottom: 8px;">
+                            <div>📄 Boleto</div>
+                        </label>
+                    </div>
+
+                    <div id="card-fields">
+                        <input type="text" placeholder="Número do Cartão" class="auth-input">
+                        <input type="text" placeholder="Nome impresso no cartão" class="auth-input">
+                        <div class="auth-row" style="display: flex; gap: 10px;">
+                            <input type="text" placeholder="Validade (MM/AA)" class="auth-input" style="flex: 1;">
+                            <input type="text" placeholder="CVV" class="auth-input" style="flex: 1;">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="auth-btn" style="width: 100%; margin-top: 20px; background-color: #28a745;">CONCLUIR PEDIDO</button>
+                </form>
+            </div>
+            
+            <div class="cart-summary-box" style="border: 1px solid #eee; padding: 25px; border-radius: 8px; height: fit-content;">
+                <h3>REVISAR PEDIDO</h3>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                
+                <div class="checkout-item" style="display: flex; gap: 15px; align-items: center; margin-bottom: 15px;">
+                    <img src="assets/img/camiseta_banner.png" alt="Produto" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                    <div style="flex: 1;">
+                        <h4 style="margin: 0; font-size: 0.9rem;">Camiseta DWD Oversized</h4>
+                        <p style="margin: 3px 0 0; font-size: 0.8rem; color: #888;">Qtd: 1 | Tam: G</p>
+                    </div>
+                    <span style="font-weight: bold; font-size: 0.9rem;">R$ 129,90</span>
+                </div>
+                
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                
+                <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span>Subtotal</span> <span>R$ 129,90</span></div>
+                <div class="summary-line" style="display: flex; justify-content: space-between; margin-bottom: 10px;"><span>Frete</span> <span style="color: #28a745; font-weight: bold;">GRÁTIS</span></div>
+                <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
+                <div class="summary-total" style="display: flex; justify-content: space-between; font-weight: 900; font-size: 1.2rem;"><span>TOTAL</span> <span>R$ 129,90</span></div>
+            </div>
+
+        </div>
+    </main>
+
+    <button id="theme-toggle" class="theme-toggle">🌙</button>
+
+    <script>
+        // 1. MODO ESCURO - VERIFICAÇÃO IMEDIATA
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        if (themeToggleBtn && document.body.classList.contains('dark-mode')) {
+            themeToggleBtn.textContent = '☀️'; 
+        }
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                if (document.body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggleBtn.textContent = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggleBtn.textContent = '🌙';
+                }
+            });
+        }
+
+        // 2. ALTERNÂNCIA DE CAMPOS DO CARTÃO + VALIDAÇÃO DINÂMICA
+        const paymentRadios = document.querySelectorAll('input[name="payment"]');
+        const cardFields = document.getElementById('card-fields');
+        
+        // Captura todos os inputs que estão dentro da caixinha do cartão
+        const cardInputs = cardFields.querySelectorAll('input');
+
+        function gerenciarCamposCartao() {
+            // Descobre qual rádio está selecionado no momento
+            const metodoSelecionado = document.querySelector('input[name="payment"]:checked').value;
+
+            if (metodoSelecionado === 'card') {
+                cardFields.style.display = 'block';
+                // Se for cartão, todos os campos dele passam a ser obrigatórios
+                cardInputs.forEach(input => input.required = true);
+            } else {
+                cardFields.style.display = 'none';
+                // Se for Pix ou Boleto, remove a obrigação para o formulário poder ser enviado
+                cardInputs.forEach(input => {
+                    input.required = false;
+                    input.value = ''; // Limpa o que o usuário digitou por engano
+                });
+            }
+        }
+
+        // Roda a função assim que a página carregar (para alinhar com o rádio padrão "card")
+        gerenciarCamposCartao();
+
+        // Escuta as mudanças de opção que o usuário fizer
+        paymentRadios.forEach(radio => {
+            radio.addEventListener('change', gerenciarCamposCartao);
+        });
+
+        // 3. RENDERIZAÇÃO REAL DOS ITENS COMPRADOS E VALORES
+        document.addEventListener("DOMContentLoaded", () => {
+            const containerItens = document.getElementById('checkout-itens-lista');
+            const subtotalEl = document.getElementById('checkout-subtotal');
+            const totalEl = document.getElementById('checkout-total');
+            const formCheckout = document.getElementById('form-checkout');
+
+            function carregarResumoPedido() {
+                let carrinho = JSON.parse(localStorage.getItem('carrinho_itens')) || [];
+                
+                if (carrinho.length === 0) {
+                    containerItens.innerHTML = `<p style="color:#888; font-size:0.9rem;">Seu carrinho está vazio.</p>`;
+                    subtotalEl.textContent = "R$ 0,00";
+                    totalEl.textContent = "R$ 0,00";
+                    return;
+                }
+
+                containerItens.innerHTML = "";
+                let totalGeral = 0;
+
+                carrinho.forEach(item => {
+                    let itemTotal = item.preco * item.quantidade;
+                    totalGeral += itemTotal;
+
+                    const itemHtml = `
+                        <div class="checkout-item" style="display: flex; gap: 15px; align-items: center; margin-bottom: 15px;">
+                            <img src="${item.imagem_url || 'assets/img/camiseta_banner.png'}" alt="${item.nome}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                            <div style="flex: 1;">
+                                <h4 style="margin: 0; font-size: 0.9rem;">${item.nome}</h4>
+                                <p style="margin: 3px 0 0; font-size: 0.8rem; color: #888;">Qtd: ${item.quantidade}</p>
+                            </div>
+                            <span style="font-weight: bold; font-size: 0.9rem;">R$ ${itemTotal.toFixed(2).replace('.', ',')}</span>
+                        </div>
+                    `;
+                    containerItens.innerHTML += itemHtml;
+                });
+
+                subtotalEl.textContent = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
+                totalEl.textContent = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
+            }
+
+            carregarResumoPedido();
+
+            // 4. SIMULAÇÃO DE FINALIZAÇÃO E LIMPEZA DE DADOS
+            if (formCheckout) {
+                formCheckout.addEventListener('submit', (evento) => {
+                    evento.preventDefault();
+                    
+                    // Pega o método de pagamento final só para personalizar o alerta
+                    const metodoFinal = document.querySelector('input[name="payment"]:checked').value;
+                    let mensagem = '🎉 Pagamento simulado com sucesso via Cartão! Obrigado por comprar na DWD Street.';
+                    
+                    if (metodoFinal === 'pix') {
+                        mensagem = '📱 Chave Pix gerada! Código Copia e Cola enviado para o seu e-mail.';
+                    } else if (metodoFinal === 'boleto') {
+                        mensagem = '📄 Boleto bancário gerado com sucesso! Código de barras disponível para cópia.';
+                    }
+
+                    alert(mensagem);
+                    
+                    // Limpa o carrinho do banco local após o sucesso da compra
+                    localStorage.removeItem('carrinho_itens');
+                    
+                    // Redireciona de volta para a página inicial
+                    window.location.href = "index.html";
+                });
+            }
+        });
+    </script>
+    
+</body>
+</html>
