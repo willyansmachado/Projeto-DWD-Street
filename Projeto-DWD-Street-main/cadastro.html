@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta | DWD Street</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body class="auth-body">
+
+    <div class="auth-container">
+        <h2>Criar Conta</h2>
+        
+        <form class="auth-form">
+            <div class="auth-row">
+                <input type="text" placeholder="Nome" class="auth-input" required>
+                <input type="text" placeholder="Sobrenome" class="auth-input" required>
+            </div>
+            <input type="text" placeholder="CPF (Somente numbers)" class="auth-input" required>
+            <input type="email" placeholder="Seu melhor e-mail" class="auth-input" required>
+            <input type="password" placeholder="Crie uma senha" class="auth-input" required>
+            <input type="password" placeholder="Confirme a senha" class="auth-input" required>
+            
+            <button type="submit" class="auth-btn">Cadastrar e Continuar</button>
+        </form>
+        
+        <div class="auth-link">
+            Já tem conta? <a href="login.html">Faça login</a>
+        </div>
+    </div>
+
+    <button id="theme-toggle" class="theme-toggle">🌙</button>
+
+    <script>
+        // MODO ESCURO - VERIFICAÇÃO IMEDIATA (Faz o tema persistir entre as páginas)
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        if (themeToggleBtn) {
+            // Ajusta o emoji do botão se já iniciou em dark-mode
+            if (body.classList.contains('dark-mode')) {
+                themeToggleBtn.textContent = '☀️'; 
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    themeToggleBtn.textContent = '☀️';
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    themeToggleBtn.textContent = '🌙';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
