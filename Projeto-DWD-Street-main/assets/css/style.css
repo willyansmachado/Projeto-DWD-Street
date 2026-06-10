@@ -1019,3 +1019,129 @@ body.dark-mode .price, body.dark-mode .product-info h3 { color: white; }
         justify-content: center;
     }
 }
+ /* ========================================= */ /* PÁGINAS INTERNAS - DWD STREET */ /* ========================================= */ .pagina-banner{ max-width:1200px; margin:60px auto 30px auto; padding:40px; background:#0d0d0d; border:1px solid #1a1a1a; border-radius:12px; } .pagina-banner h1{ color:#fff; font-size:2.4rem; font-weight:900; margin-bottom:10px; text-transform:uppercase; } .pagina-banner p{ color:#8f8f8f; font-size:1rem; } .pagina-interna{ max-width:1200px; margin:0 auto 80px auto; padding:0 20px; color:#fff; } .pagina-interna h1{ display:none; } .pagina-interna h2{ color:#fff; font-size:1.5rem; margin-bottom:20px; } .pagina-interna p{ color:#a5a5a5; line-height:1.8; } /* ========================================= */ /* FAQ */ /* ========================================= */ .faq-item{ background:#111111; border:1px solid #222; border-radius:10px; padding:25px; margin-bottom:15px; transition:.3s; } .faq-item:hover{ border-color:var(--red); } .faq-item h3{ color:#fff; margin-bottom:10px; font-size:1.05rem; } .faq-item p{ color:#9f9f9f; } /* ========================================= */ /* CONTATO */ /* ========================================= */ .contato-grid{ display:grid; grid-template-columns:1fr 2fr; gap:25px; } .contato-info, .contato-form{ background:#111111; border:1px solid #222; border-radius:10px; padding:25px; } .contato-info h2{ margin-bottom:20px; } .contato-info p{ margin-bottom:15px; } .contato-form input, .contato-form textarea{ width:100%; background:#181818; border:1px solid #2a2a2a; border-radius:8px; color:#fff; padding:15px; margin-bottom:15px; } .contato-form input:focus, .contato-form textarea:focus{ outline:none; border-color:var(--red); } .contato-form button{ width:100%; padding:15px; background:var(--red); color:#fff; border:none; border-radius:8px; font-weight:700; cursor:pointer; transition:.3s; } .contato-form button:hover{ opacity:.9; } /* ========================================= */ /* TROCAS */ /* ========================================= */ .passos{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; } .passo{ background:#111111; border:1px solid #222; border-radius:10px; padding:25px; text-align:center; transition:.3s; } .passo:hover{ transform:translateY(-5px); border-color:var(--red); } .passo h2{ color:var(--red); font-size:2.8rem; margin-bottom:10px; } .passo h3{ color:#fff; margin-bottom:10px; } .passo p{ color:#9f9f9f; } /* ========================================= */ /* RASTREIO */ /* ========================================= */ .rastreio-box{ display:flex; gap:15px; margin-bottom:30px; } .rastreio-box input{ flex:1; background:#111111; border:1px solid #2a2a2a; color:#fff; padding:15px; border-radius:8px; } .rastreio-box input:focus{ outline:none; border-color:var(--red); } .rastreio-box button{ background:var(--red); color:#fff; border:none; border-radius:8px; padding:15px 30px; font-weight:700; cursor:pointer; } .pedido-status{ margin-top:25px; } .etapa{ background:#111111; border:1px solid #222; border-radius:8px; padding:18px 20px; margin-bottom:12px; color:#fff; } .concluida{ border-left:4px solid #28a745; } .ativa{ border-left:4px solid var(--red); } .pendente{ border-left:4px solid #444; } /* ========================================= */ /* SOBRE */ /* ========================================= */ .sobre-card{ background:#111111; border:1px solid #222; border-radius:10px; padding:25px; margin-bottom:20px; } .sobre-card h3{ color:#fff; margin-bottom:10px; } .sobre-card p{ color:#9f9f9f; } /* ========================================= */ /* RESPONSIVO */ /* ========================================= */ @media(max-width:900px){ .contato-grid{ grid-template-columns:1fr; } .passos{ grid-template-columns:1fr 1fr; } } @media(max-width:768px){ .rastreio-box{ flex-direction:column; } .passos{ grid-template-columns:1fr; } .pagina-banner h1{ font-size:1.8rem; } } /* ========================================= */ /* FAQ */ /* ========================================= */ .faq-item{ background:#111111; border:1px solid #222; border-radius:10px; padding:25px; margin-bottom:15px; transition:.3s; } .faq-item:hover{ border-color:var(--red); } .faq-item h3{ color:#fff; margin-bottom:10px; font-size:1.05rem; } .faq-item p{ color:#9f9f9f; } /* ========================================= */ /* CONTATO */ /* ========================================= */ .contato-grid{ display:grid; grid-template-columns:1fr 2fr; gap:25px; } .contato-info, .contato-form{ background:#111111; border:1px solid #222; border-radius:10px; padding:25px; } .contato-info h2{ margin-bottom:20px; } .contato-info p{ margin-bottom:15px; } .contato-form input, .contato-form textarea{ width:100%; background:#181818; border:1px solid #2a2a2a; border-radius:8px; color:#fff; padding:15px; margin-bottom:15px; } .contato-form input:focus, .contato-form textarea:focus{ outline:none; border-color:var(--red); } .contato-form button{ width:100%; padding:15px; background:var(--red); color:#fff; border:none; border-radius:8px; font-weight:700; cursor:pointer; transition:.3s; } .contato-form button:hover{ opacity:.9; } /* ========================================= */ /* TROCAS */ /* ========================================= */ .passos{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; } .passo{ background:#111111; border:1px solid #222; border-radius:10px; padding:25px; text-align:center; transition:.3s; } .passo:hover{ transform:translateY(-5px); border-color:var(--red); } .passo h2{ color:var(--red); font-size:2.8rem; margin-bottom:10px; } .passo h3{ color:#fff; margin-bottom:10px; } .passo p{ color:#9f9f9f; } /* ========================================= */ /* RASTREIO */ /* ========================================= */ .rastreio-box{ display:flex; gap:15px; margin-bottom:30px; } .rastreio-box input{ flex:1; background:#111111; border:1px solid #2a2a2a; color:#fff; padding:15px; border-radius:8px; } .rastreio-box input:focus{ outline:none; border-color:var(--red); } .rastreio-box button{ background:var(--red); color:#fff; border:none; border-radius:8px; padding:15px 30px; font-weight:700; cursor:pointer; } .pedido-status{ margin-top:25px; } .etapa{ background:#111111; border:1px solid #222; border-radius:8px; padding:18px 20px; margin-bottom:12px; color:#fff; } .concluida{ border-left:4px solid #28a745; } .ativa{ border-left:4px solid var(--red); } .pendente{ border-left:4px solid #444; } /* ========================================= */ /* SOBRE */ /* ========================================= */ .sobre-card{ background:#111111; border:1px solid #222; border-radius:10px; padding:25px; margin-bottom:20px; } .sobre-card h3{ color:#fff; margin-bottom:10px; } .sobre-card p{ color:#9f9f9f; } /* ========================================= */ /* RESPONSIVO */ /* ========================================= */ @media(max-width:900px){ .contato-grid{ grid-template-columns:1fr; } .passos{ grid-template-columns:1fr 1fr; } } @media(max-width:768px){ .rastreio-box{ flex-direction:column; } .passos{ grid-template-columns:1fr; } .pagina-banner h1{ font-size:1.8rem; } }
+/* ========================= */
+/* HEADER NOVO DWD STREET */
+/* ========================= */
+
+.navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:15px 40px;
+    background:#fff;
+    border-bottom:1px solid #e5e5e5;
+    gap:30px;
+}
+
+.main-nav{
+    flex:1;
+}
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    list-style:none;
+}
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.user-info{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+    margin-right:10px;
+}
+
+.user-info span{
+    color:#888;
+    font-size:12px;
+}
+
+.user-info strong{
+    color:#fff;
+    font-size:16px;
+    font-weight:700;
+}
+
+.header-btn{
+    background:#222;
+    color:#fff;
+    text-decoration:none;
+    padding:10px 14px;
+    border-radius:8px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.header-btn:hover{
+    background:#333;
+}
+
+.theme-btn{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:8px;
+    background:#222;
+    color:#fff;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.logout-btn{
+    background:#e31e24;
+    color:#fff;
+    text-decoration:none;
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:700;
+    transition:.3s;
+}
+
+.logout-btn:hover{
+    background:#c71b20;
+}
+.header-actions{
+    margin-left:auto !important;
+    display:flex !important;
+    align-items:center !important;
+    gap:10px !important;
+}
+
+.user-info{
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:flex-end !important;
+}
+
+.header-btn{
+    background:#222 !important;
+    color:#fff !important;
+    padding:10px 15px !important;
+    border-radius:8px !important;
+    text-decoration:none !important;
+    font-weight:700 !important;
+}
+
+.theme-btn{
+    width:42px !important;
+    height:42px !important;
+    border:none !important;
+    border-radius:8px !important;
+    background:#222 !important;
+    color:#fff !important;
+}
+
+.logout-btn{
+    background:#e31e24 !important;
+    color:#fff !important;
+    padding:10px 16px !important;
+    border-radius:8px !important;
+    text-decoration:none !important;
+    font-weight:700 !important;
+}
