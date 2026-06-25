@@ -1,0 +1,983 @@
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:'Montserrat',sans-serif;
+    }
+
+    body{
+        background:#0D0D0D; /* ALTERADO: Fundo preto */
+        color: #f2f2f2; /* Adicionado texto claro */
+    }
+
+    .container{
+        display:flex;
+        min-height:100vh;
+    }
+
+    /* MENU */
+
+    .sidebar{
+
+        width:260px;
+        background:#121212;
+        color:#fff;
+
+        display:flex;
+        flex-direction:column;
+        justify-content:space-between;
+
+        position:fixed;
+        left:0;
+        top:0;
+        bottom:0;
+
+    }
+
+    .logo{
+
+        padding:30px;
+        text-align:center;
+        border-bottom:1px solid #2d2d2d;
+
+    }
+
+    .logo h2{
+
+        color:#fff;
+        font-size:30px;
+        font-weight:900;
+
+    }
+    .logo span{
+        color:#e60000; /* ALTERADO: Laranja para Vermelho */
+    }
+
+    .logo p{
+
+        color:#999;
+        margin-top:10px;
+        font-size:14px;
+
+    }
+
+    .sidebar ul{
+
+        list-style:none;
+        margin-top:30px;
+
+    }
+
+    .sidebar ul li{
+
+        margin:8px 15px;
+
+    }
+
+    .sidebar ul li a{
+
+        display:flex;
+        align-items:center;
+        gap:15px;
+
+        padding:15px;
+
+        color:white;
+
+        text-decoration:none;
+
+        border-radius:10px;
+
+        transition:.3s;
+
+    }
+    .sidebar ul li a:hover{
+        background:#e60000; /* ALTERADO */
+    }
+    
+    .sidebar ul li.active a{
+        background:#e60000; /* ALTERADO */
+    }
+
+    .sidebar i{
+
+        width:20px;
+        text-align:center;
+
+    }
+
+    .logout{
+
+        padding:20px;
+
+    }
+
+    .logout a{
+
+        display:flex;
+
+        align-items:center;
+
+        gap:15px;
+
+        background:#d62828;
+
+        color:white;
+
+        padding:15px;
+
+        border-radius:10px;
+
+        text-decoration:none;
+
+        transition:.3s;
+
+    }
+
+    .logout a:hover{
+
+        background:#b91c1c;
+
+    }
+
+    /* CONTEÚDO */
+
+    .main{
+
+        margin-left:260px;
+
+        width:calc(100% - 260px);
+
+    }
+
+    .topbar{
+
+        height:80px;
+
+        background:white;
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:center;
+
+        padding:0 35px;
+
+        box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    }
+
+    .conteudo{
+
+        padding:35px;
+    }
+    /* ===========================
+    TOPBAR
+    =========================== */
+
+    .topbar{
+        height:80px;
+        background:#1a1a1a; /* ALTERADO: Fundo cinza escuro */
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        padding:0 35px;
+        box-shadow:0 2px 10px rgba(0,0,0,.5); /* ALTERADO: Sombra mais escura */
+    }
+
+    .topbar h2{
+        color:#f2f2f2; /* ALTERADO: Texto claro */
+        font-size:24px;
+    }
+
+    .topbar-right{
+        display:flex;
+        align-items:center;
+        gap:25px;
+    }
+
+    /* Pesquisa */
+
+    .pesquisa{
+        display:flex;
+        align-items:center;
+        background:#2d2d2d; /* ALTERADO: Fundo pesquisa escuro */
+        padding:10px 15px;
+        border-radius:10px;
+    }
+
+    .pesquisa input{
+        border:none;
+        background:none;
+        outline:none;
+        margin-left:10px;
+        width:220px;
+        color: #f2f2f2; /* ALTERADO: Cor do texto digitado */
+    }
+
+    /* Notificação */
+
+    .notificacao{
+        position:relative;
+        font-size:22px;
+        cursor:pointer;
+    }
+
+    .badge{
+        position:absolute;
+        top:-8px;
+        right:-10px;
+        background:#e60000;
+        color:#fff;
+        width:18px;
+        height:18px;
+        border-radius:50%;
+        font-size:11px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    /* Usuário */
+
+    .usuario{
+        display:flex;
+        align-items:center;
+        gap:15px;
+    }
+
+    .usuario img{
+        width:45px;
+        height:45px;
+        border-radius:50%;
+        object-fit:cover;
+        border:2px solid #e60000;
+    }
+
+    .usuario .info{
+        display:flex;
+        flex-direction:column;
+    }
+
+    .usuario strong{
+        color:#f2f2f2; /* ALTERADO: Texto claro */
+    }
+
+    .usuario small{
+        color:#888;
+    }
+
+    /* Dropdown */
+
+    .dropdown{
+        position:relative;
+        cursor:pointer;
+    }
+
+    .dropdown-menu{
+
+        position:absolute;
+        top:45px;
+        right:0;
+
+        width:220px;
+
+        background:#1a1a1a; /* ALTERADO: Fundo escuro */
+
+        border-radius:10px;
+
+        box-shadow:0 5px 20px rgba(0,0,0,.5);
+
+        display:none;
+
+        overflow:hidden;
+
+    }
+
+    .dropdown.ativo .dropdown-menu{
+
+        display:block;
+
+    }
+
+    .dropdown-menu a{
+
+        display:flex;
+
+        align-items:center;
+
+        gap:12px;
+
+        color:#f2f2f2;
+
+        text-decoration:none;
+
+        padding:15px;
+
+        transition:.3s;
+
+    }
+
+    .dropdown-menu a:hover{
+
+        background:#2d2d2d;
+
+    }
+
+    .dropdown-menu .sair{
+
+        color:#d62828;
+
+    }
+
+    .dropdown-menu hr{
+        border:none;
+        border-top:1px solid #333; /* ALTERADO: Linha divisória escura */
+    }
+    /* ===========================
+    CARDS
+    =========================== */
+
+    .cards{
+
+        display:grid;
+        
+        grid-template-columns:repeat(4,1fr);
+        
+        gap:25px;
+        
+        margin-top:30px;
+        
+        }
+        
+        .card{
+            background:#1a1a1a; /* ALTERADO */
+            border-radius:15px;
+            padding:30px;
+            box-shadow:0 10px 20px rgba(0,0,0,.5); /* ALTERADO */
+            transition:.3s;
+            text-align:center; /* Mesclando com sua outra classe card lá embaixo */
+        }
+        .card:hover{
+        
+        transform:translateY(-8px);
+        
+        }
+        
+        .card i{
+            font-size:40px; /* Ajustado pelo seu segundo bloco */
+            color:#e60000; /* ALTERADO */
+            margin-bottom:20px;
+        }
+        
+        .card h2{
+            font-size:30px; /* Ajustado pelo seu segundo bloco */
+            margin-bottom:10px;
+            color:#f2f2f2; /* ALTERADO */
+        }
+        
+        .card p{
+        
+            color:#aaa; /* ALTERADO */
+        }
+        
+        /* ===========================
+        TABELA
+        =========================== */
+        
+        .tabela{
+        
+        margin-top:40px;
+        background:#1a1a1a; /* ALTERADO */
+        padding:30px;
+        border-radius:15px;
+        box-shadow:0 10px 20px rgba(0,0,0,.5);
+        
+        }
+        
+        .tabela h2{
+        
+        margin-bottom:20px;
+        
+        }
+        
+        table{
+        
+        width:100%;
+        
+        border-collapse:collapse;
+        
+        }
+        
+        table th, .cardPainel table th, .box table th{
+            background:#e60000; /* ALTERADO */
+            color:white;
+            padding:15px;
+        }
+        
+        table td, .cardPainel table td, .box table td{
+            padding:15px;
+            border-bottom:1px solid #333; /* ALTERADO */
+            color: #f2f2f2; /* ALTERADO: Cor do texto da tabela */
+        }
+        
+        table tr:hover{
+            background:#2d2d2d; /* ALTERADO */
+        }
+        .titulo{
+
+            display:flex;
+            
+            justify-content:space-between;
+            
+            align-items:center;
+            
+            margin-bottom:30px;
+            
+            }
+            
+            .btnNovo, form button, .pesquisaForm button, .btnSalvar {
+                background:#e60000; /* ALTERADO */
+            
+            padding:14px 22px;
+            
+            color:white;
+            
+            text-decoration:none;
+            
+            border-radius:8px;
+            
+            font-weight:bold;
+            
+            transition:.3s;
+            
+            }
+            
+            .btnNovo:hover, .btnSalvar:hover {
+                background:#cc0000; /* ALTERADO: Tom mais escuro para hover */
+            }
+            
+            form .pesquisa, .pesquisaForm input, .grupo input, .grupo textarea, .grupo select {
+                padding:14px; /* Mantém o que já tinha ou 12px dependendo da classe */
+                border:1px solid #444; /* ALTERADO: borda mais escura */
+                border-radius:10px; /* ou 8px dependendo da classe */
+                font-size:15px;
+                background: #222; /* ALTERADO: fundo do input escuro */
+                color: #f2f2f2; /* ALTERADO: texto digitado claro */
+            }
+            
+            form .pesquisa{
+            
+            width:350px;
+            
+            padding:12px;
+            
+            border:1px solid #ddd;
+            
+            border-radius:8px 0 0 8px;
+            
+            }
+            
+            form button{
+            
+            width:55px;
+            
+            border:none;
+            
+            background:#ff5b00;
+            
+            color:white;
+            
+            border-radius:0 8px 8px 0;
+            
+            cursor:pointer;
+            
+            }
+            
+            table img{
+            
+            border-radius:8px;
+            
+            object-fit:cover;
+            
+            }
+            
+            .editar{
+            
+            background:#3498db;
+            
+            color:white;
+            
+            padding:10px;
+            
+            border-radius:6px;
+            
+            text-decoration:none;
+            
+            margin-right:5px;
+            
+            }
+            
+            .excluir{
+            
+            background:#e74c3c;
+            
+            color:white;
+            
+            padding:10px;
+            
+            border-radius:6px;
+            
+            text-decoration:none;
+            
+            }
+            /* ==========================
+    FORMULÁRIOS
+    ========================== */
+
+    .formulario{
+
+        background:#1a1a1a; /* ALTERADO */
+        
+        padding:35px;
+        
+        border-radius:15px;
+        
+        box-shadow:0 10px 25px rgba(0,0,0,.5);
+        
+        }
+        
+        .grupo{
+        
+        display:flex;
+        
+        flex-direction:column;
+        
+        margin-bottom:25px;
+        
+        }
+        
+        .grupo label{
+            font-weight:600;
+            margin-bottom:8px;
+            color: #f2f2f2; /* ALTERADO */
+        }
+        
+        .grupo input,
+        .grupo textarea,
+        .grupo select{
+        
+        padding:14px;
+        
+        border:1px solid #ddd;
+        
+        border-radius:10px;
+        
+        font-size:15px;
+        
+        }
+        
+        .linha{
+        
+        display:grid;
+        
+        grid-template-columns:1fr 1fr;
+        
+        gap:20px;
+        
+        }
+        
+        .preview{
+        
+        margin-top:25px;
+        
+        }
+        
+        .preview img{
+        
+        width:220px;
+        
+        height:220px;
+        
+        border-radius:12px;
+        
+        border:2px dashed #555; /* ALTERADO */
+        
+        object-fit:cover;
+        
+        }
+        
+        .botoes{
+        
+        display:flex;
+        
+        gap:15px;
+        
+        margin-top:35px;
+        
+        }
+        
+        .btnSalvar{
+        
+        background:#ff5b00;
+        
+        color:white;
+        
+        border:none;
+        
+        padding:15px 30px;
+        
+        border-radius:10px;
+        
+        cursor:pointer;
+        
+        font-size:15px;
+        
+        font-weight:bold;
+        
+        }
+        
+        .btnSalvar:hover{
+        
+        background:#e65000;
+        
+        }
+        
+        .btnCancelar{
+        
+        background:#555;
+        
+        color:white;
+        
+        padding:15px 30px;
+        
+        text-decoration:none;
+        
+        border-radius:10px;
+        
+        }
+        
+        .btnVoltar{
+        
+        background:#444;
+        
+        color:white;
+        
+        padding:12px 20px;
+        
+        text-decoration:none;
+        
+        border-radius:8px;
+        
+        }
+        .sucesso{
+
+            background:#16a34a;
+            
+            color:white;
+            
+            padding:15px;
+            
+            border-radius:10px;
+            
+            margin-bottom:20px;
+            
+            font-weight:bold;
+            
+            }
+            
+            .erro{
+            
+            background:#dc2626;
+            
+            color:white;
+            
+            padding:15px;
+            
+            border-radius:10px;
+            
+            margin-bottom:20px;
+            
+            font-weight:bold;
+            
+            }
+            .pesquisaForm{
+
+                display:flex;
+                
+                margin-bottom:25px;
+                
+                }
+                
+                .pesquisaForm input{
+                
+                width:350px;
+                
+                padding:12px;
+                
+                border:1px solid #ddd;
+                
+                border-radius:8px 0 0 8px;
+                
+                outline:none;
+                
+                }
+                
+                .pesquisaForm button{
+                
+                width:55px;
+                
+                background:#ff5b00;
+                
+                color:white;
+                
+                border:none;
+                
+                border-radius:0 8px 8px 0;
+                
+                cursor:pointer;
+                
+                }
+                
+                .status{
+                
+                padding:8px 14px;
+                
+                border-radius:30px;
+                
+                font-size:13px;
+                
+                font-weight:bold;
+                
+                color:white;
+                
+                }
+                
+                .recebido{
+                
+                background:#3498db;
+                
+                }
+                
+                .preparando{
+                
+                background:#f39c12;
+                
+                }
+                
+                .enviado{
+                
+                background:#8e44ad;
+                
+                }
+                
+                .entregue{
+                
+                background:#27ae60;
+                
+                }
+                
+                .btnAcao{
+                
+                padding:10px;
+                
+                border-radius:8px;
+                
+                text-decoration:none;
+                
+                margin-right:5px;
+                
+                color:white;
+                
+                display:inline-block;
+                
+                }
+                
+                .visualizar{
+                
+                background:#16a085;
+                
+                }
+                
+                .editar{
+                
+                background:#2980b9;
+                
+                }
+                
+                .visualizar:hover{
+                
+                background:#12806d;
+                
+                }
+                
+                .editar:hover{
+                
+                background:#21618c;
+                
+                }
+                .cardPainel{
+
+                    background:white;
+                    
+                    padding:25px;
+                    
+                    margin-bottom:25px;
+                    
+                    border-radius:12px;
+                    
+                    box-shadow:0 3px 15px rgba(0,0,0,.08);
+                    
+                    }
+                    
+                    .cardPainel h2{
+                    
+                    margin-bottom:20px;
+                    
+                    color:#ff5b00;
+                    
+                    }
+                    
+                    .cardPainel p{
+                        color: #ccc; /* ALTERADO */
+                    }
+                    
+                    .cardPainel table{
+                    
+                    width:100%;
+                    
+                    border-collapse:collapse;
+                    
+                    margin-top:20px;
+                    
+                    }
+                    
+                    .cardPainel table th{
+                    
+                    background:#ff5b00;
+                    
+                    color:white;
+                    
+                    padding:12px;
+                    
+                    }
+                    
+                    .cardPainel table td{
+                    
+                    padding:12px;
+                    
+                    border-bottom:1px solid #eee;
+                    
+                    }
+                    .excluir{
+
+                        background:#e74c3c;
+                        
+                        }
+                        
+                        .excluir:hover{
+                        
+                        background:#c0392b;
+                        
+                        }
+                        .cards{
+
+                            display:grid;
+                            
+                            grid-template-columns:repeat(4,1fr);
+                            
+                            gap:25px;
+                            
+                            margin:30px 0;
+                            
+                            }
+                            
+                            .card{
+                            
+                            background:#fff;
+                            
+                            padding:30px;
+                            
+                            border-radius:15px;
+                            
+                            box-shadow:0 5px 20px rgba(0,0,0,.08);
+                            
+                            text-align:center;
+                            
+                            transition:.3s;
+                            
+                            }
+                            
+                            .card:hover{
+                            
+                            transform:translateY(-5px);
+                            
+                            }
+                            
+                            .card i{
+                            
+                            font-size:40px;
+                            
+                            color:#ff5b00;
+                            
+                            margin-bottom:20px;
+                            
+                            }
+                            
+                            .card h2{
+                            
+                            font-size:30px;
+                            
+                            margin-bottom:10px;
+                            
+                            }
+                            
+                            .dashboard-grid{
+                            
+                            display:grid;
+                            
+                            grid-template-columns:2fr 1fr;
+                            
+                            gap:25px;
+                            
+                            }
+                            
+                            .box, .cardPainel {
+                                background:#1a1a1a; /* ALTERADO */
+                                padding:25px;
+                                border-radius:15px;
+                                box-shadow:0 5px 20px rgba(0,0,0,.5); /* ALTERADO */
+                                margin-bottom: 25px; /* Do cardPainel */
+                            }
+                            
+                            .box h2, .cardPainel h2 {
+                                margin-bottom:20px;
+                                color:#e60000; /* ALTERADO */
+                            }
+                            
+                            .box table{
+                            
+                            width:100%;
+                            
+                            border-collapse:collapse;
+                            
+                            }
+                            
+                            .box table th{
+                            
+                            background:#ff5b00;
+                            
+                            color:white;
+                            
+                            padding:12px;
+                            
+                            }
+                            
+                            .box table td{
+                            
+                            padding:12px;
+                            
+                            border-bottom:1px solid #eee;
+                            
+                            }
