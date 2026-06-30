@@ -1,63 +1,99 @@
 <?php
+session_start();
 
 include("../../config/conexao.php");
 include("../includes/verifica_login.php");
 
-$nome = trim($_POST['nome']);
-$descricao = trim($_POST['descricao']);
-$preco = $_POST['preco'];
-$estoque = $_POST['estoque'];
-$categoria = $_POST['categoria'];
-
-$imagem = "";
-
-/* Upload da imagem */
-
-if(isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0){
-
-    $extensao = strtolower(pathinfo($_FILES['imagem']['name'], PATHINFO_EXTENSION));
-
-    $permitidas = ['jpg','jpeg','png','webp'];
-
-    if(in_array($extensao,$permitidas)){
-
-        $novoNome = uniqid("produto_") . "." . $extensao;
-
-        $destino = "../../uploads/produtos/" . $novoNome;
-
-        move_uploaded_file($_FILES['imagem']['tmp_name'],$destino);
-
-        $imagem = "uploads/produtos/" . $novoNome;
-
-    }
-
+if ($_SERVER["REQUEST_METHOD"] != "POST") {
+    header("Location: index.php");
+    exit;
 }
 
-$sql = "INSERT INTO produtos
-(nome,descricao,preco,estoque,imagem,categoria)
-VALUES
-(?,?,?,?,?,?)";
+$nome = trim($_POST["nome"]);
+$categoria_id = (int)$_POST["categoria_id"];
 
-$stmt = mysqli_prepare($conn,$sql);
+$marca_id = !empty($_POST["marca_id"])
+    ? (int)$_POST["marca_id"]
+    : NULL;
+
+$sku = trim($_POST["sku"]);
+$codigo_barras = trim($_POST["codigo_barras"]);
+
+$preco = str_replace(",", ".", $_POST["preco"]);
+
+$preco_promocional = $_POST["preco_promocional"] != ""
+    ? str_replace(",", ".", $_POST["preco_promocional"])
+    : NULL;
+
+$descricao_curta = trim($_POST["descricao_curta"]);
+$descricao = trim($_POST["descricao"]);
+
+$ativo = (int)$_POST["ativo"];
+
+/* GERAR SLUG */
+
+$slug = strtolower($nome);
+
+$slug = preg_replace('/[^a-z0-9]+/i', '-', $slug);
+
+$slug = trim($slug, '-');
+
+/* SQL */
+
+$sql = "INSERT INTO produtos
+(
+categoria_id,
+marca_id,
+nome,
+slug,
+descricao,
+descricao_curta,
+sku,
+codigo_barras,
+preco,
+preco_promocional,
+ativo
+)
+
+VALUES
+(
+?,
+?,
+?,
+?,
+?,
+?,
+?,
+?,
+?,
+?,
+?
+)";
+
+$stmt = mysqli_prepare($conn, $sql);
 
 mysqli_stmt_bind_param(
-$stmt,
-"ssdiss",
-$nome,
-$descricao,
-$preco,
-$estoque,
-$imagem,
-$categoria
+    $stmt,
+    "iissssssddi",
+    $categoria_id,
+    $marca_id,
+    $nome,
+    $slug,
+    $descricao,
+    $descricao_curta,
+    $sku,
+    $codigo_barras,
+    $preco,
+    $preco_promocional,
+    $ativo
 );
 
-if(mysqli_stmt_execute($stmt)){
+if (mysqli_stmt_execute($stmt)) {
 
-    header("Location: index.php?sucesso=1");
-    exit();
+    header("Location: index.php");
 
-}else{
+} else {
 
-    echo "Erro ao cadastrar produto.";
+    echo "Erro ao salvar: " . mysqli_error($conn);
 
 }

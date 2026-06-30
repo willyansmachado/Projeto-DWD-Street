@@ -1,10 +1,12 @@
 <?php
-session_start(); // Inicia a sessão logo de cara
 
-if(!isset($_SESSION['nome'])) {
-    // Se não tiver sessão (não estiver logado), manda pro login
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION["id"])) {
     header("Location: ../login.php");
-    exit;
+    exit();
 }
 
 if ($_SESSION["nivel"] != "admin") {

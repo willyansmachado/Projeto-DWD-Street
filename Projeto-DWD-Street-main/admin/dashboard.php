@@ -1,9 +1,7 @@
 <?php
-// INICIA A SESSÃO AQUI (Deve ser a primeira coisa!)
-session_start(); 
 
 include("../config/conexao.php");
-include("includes/verifica_login.php");
+include("includes/verificar_login.php");
 
 $sql = "SELECT COUNT(*) AS total FROM produtos";
 $res = mysqli_query($conn,$sql);
@@ -24,12 +22,12 @@ $totalPedidos = mysqli_fetch_assoc($res)['total'];
 /* FATURAMENTO */
 
 $sql = "SELECT SUM(total) AS faturamento FROM pedidos";
-$res = mysqli_query($conn,$sql);
+$res = mysqli_query($conn, $sql);
 
 $faturamento = mysqli_fetch_assoc($res)['faturamento'];
 
-if($faturamento==""){
-    $faturamento=0;
+if ($faturamento == null) {
+    $faturamento = 0;
 }
 
 /* ÚLTIMOS PEDIDOS */
@@ -37,32 +35,18 @@ if($faturamento==""){
 $sqlPedidos = "SELECT
 usuarios.nome,
 pedidos.total,
-pedidos.status_pedido
+pedidos.status
 
 FROM pedidos
 
 INNER JOIN usuarios
-ON usuarios.id=pedidos.usuario_id
+ON usuarios.id = pedidos.usuario_id
 
 ORDER BY pedidos.id DESC
 
 LIMIT 5";
 
-$ultimosPedidos=mysqli_query($conn,$sqlPedidos);
-
-/* ESTOQUE BAIXO */
-
-$sqlEstoque="SELECT *
-
-FROM produtos
-
-WHERE estoque<=5
-
-ORDER BY estoque ASC
-
-LIMIT 5";
-
-$estoque=mysqli_query($conn,$sqlEstoque);
+$ultimosPedidos = mysqli_query($conn, $sqlPedidos);
 
 ?>
 
@@ -147,7 +131,7 @@ R$
 
 </div>
 
-<div class="dashboard-grid">
+<div class="dashboard-grid" style="grid-template-columns:1fr;">
 
 <div class="box">
 
@@ -187,7 +171,7 @@ R$
 
 </td>
 
-<td><?= $pedido['status_pedido']; ?></td>
+<td><?= $pedido['status']; ?></td>
 
 </tr>
 
@@ -198,42 +182,6 @@ R$
 </div>
 
 <div class="box">
-
-<h2>
-
-Estoque Baixo
-
-</h2>
-
-<table>
-
-<tr>
-
-<th>Produto</th>
-
-<th>Qtd</th>
-
-</tr>
-
-<?php
-
-while($produto=mysqli_fetch_assoc($estoque)){
-
-?>
-
-<tr>
-
-<td><?= $produto['nome']; ?></td>
-
-<td><?= $produto['estoque']; ?></td>
-
-</tr>
-
-<?php } ?>
-
-</table>
-
-</div>
 
 </div>
 

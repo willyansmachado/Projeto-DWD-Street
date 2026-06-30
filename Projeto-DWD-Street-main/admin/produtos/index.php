@@ -1,20 +1,25 @@
 <?php
+session_start();
 
 include("../../config/conexao.php");
-include("../includes/verifica_login.php");
+include("../includes/verificar_login.php");
 
-$pesquisa = "";
+$sql = "SELECT
+p.*,
+c.nome AS categoria,
+m.nome AS marca
 
-if(isset($_GET['pesquisa'])){
-    $pesquisa = mysqli_real_escape_string($conn,$_GET['pesquisa']);
-}
+FROM produtos p
 
-$sql = "SELECT * FROM produtos
-        WHERE nome LIKE '%$pesquisa%'
-        ORDER BY id DESC";
+INNER JOIN categorias c
+ON c.id = p.categoria_id
 
-$resultado = mysqli_query($conn,$sql);
+LEFT JOIN marcas m
+ON m.id = p.marca_id
 
+ORDER BY p.id DESC";
+
+$resultado = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +29,7 @@ $resultado = mysqli_query($conn,$sql);
 
 <meta charset="UTF-8">
 
-<title>Produtos | DWD Street</title>
+<title>Produtos</title>
 
 <link rel="stylesheet" href="../css/admin.css">
 
@@ -44,40 +49,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 <?php include("../includes/topbar.php"); ?>
 
 <div class="conteudo">
-<?php if(isset($_GET['sucesso'])){ ?>
-
-<div class="sucesso">
-
-Produto cadastrado com sucesso!
-
-</div>
-<?php if(isset($_GET['editado'])){ ?>
-
-<div class="sucesso">
-
-Produto atualizado com sucesso!
-
-</div>
-
-<?php } ?>
-
-<?php if(isset($_GET['excluido'])){ ?>
-
-<div class="sucesso">
-
-Produto excluído com sucesso!
-
-</div>
-
-<?php } ?>
-
-<?php } ?>
-
-<div class="titulo">
 
 <h1>Produtos</h1>
 
-<a href="adicionar.php" class="btnNovo">
+<a href="criar.php" class="btn">
 
 <i class="fa-solid fa-plus"></i>
 
@@ -85,114 +60,69 @@ Novo Produto
 
 </a>
 
-</div>
-
-<form method="GET">
-
-<input
-type="text"
-name="pesquisa"
-placeholder="Pesquisar produto..."
-value="<?= $pesquisa ?>"
-class="pesquisa">
-
-<button>
-
-<i class="fa-solid fa-magnifying-glass"></i>
-
-</button>
-
-</form>
+<br><br>
 
 <table>
-
-<thead>
 
 <tr>
 
 <th>ID</th>
 
-<th>Imagem</th>
-
 <th>Nome</th>
 
 <th>Categoria</th>
 
+<th>Marca</th>
+
 <th>Preço</th>
 
-<th>Estoque</th>
+<th>Status</th>
 
 <th>Ações</th>
 
 </tr>
 
-</thead>
-
-<tbody>
-
 <?php while($produto=mysqli_fetch_assoc($resultado)){ ?>
 
 <tr>
 
-<td><?= $produto['id']; ?></td>
+<td><?= $produto['id'] ?></td>
+
+<td><?= htmlspecialchars($produto['nome']) ?></td>
+
+<td><?= htmlspecialchars($produto['categoria']) ?></td>
+
+<td><?= htmlspecialchars($produto['marca'] ?? '-') ?></td>
 
 <td>
 
-<?php
-
-if($produto['imagem'] != ""){
-
-?>
-
-<img
-src="../../<?= $produto['imagem']; ?>"
-width="70"
-height="70"
-style="object-fit:cover;border-radius:8px;">
-
-<?php
-
-}else{
-
-?>
-
-<img
-src="../img/sem-imagem.png"
-width="70">
-
-<?php } ?>
+R$ <?= number_format($produto['preco'],2,",",".") ?>
 
 </td>
 
-<td><?= $produto['nome']; ?></td>
-
-<td><?= $produto['categoria']; ?></td>
-
 <td>
 
-R$
-<?= number_format($produto['preco'],2,",","."); ?>
+<?= $produto['ativo'] ? "Ativo" : "Inativo"; ?>
 
 </td>
 
-<td><?= $produto['estoque']; ?></td>
-
 <td>
 
-<a
-href="editar.php?id=<?= $produto['id']; ?>"
-class="editar">
+<a class="btn-editar"
 
-<i class="fa-solid fa-pen"></i>
+href="editar.php?id=<?= $produto['id'] ?>">
+
+Editar
 
 </a>
 
-<a
-href="excluir.php?id=<?= $produto['id']; ?>"
-class="excluir"
+<a class="btn-excluir"
+
+href="excluir.php?id=<?= $produto['id'] ?>"
+
 onclick="return confirm('Deseja excluir este produto?')">
 
-<i class="fa-solid fa-trash"></i>
+Excluir
 
 </a>
 
@@ -201,8 +131,6 @@ onclick="return confirm('Deseja excluir este produto?')">
 </tr>
 
 <?php } ?>
-
-</tbody>
 
 </table>
 
