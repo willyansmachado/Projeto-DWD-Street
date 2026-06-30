@@ -1,6 +1,3 @@
--- =========================================================
--- DWD STREET V2
--- PARTE 1
 CREATE DATABASE dwd_street
 CHARACTER SET utf8mb4
 COLLATE utf8mb4_unicode_ci;
@@ -1223,10 +1220,9 @@ VALUES
 
 ('João','joao@email.com','Entrega','Qual o prazo de entrega?'),
 
-('Maria','maria@email.com','Produto','Quando volta ao estoque?');
+('Maria Eduarda','maria@email.com','Produto','Quando volta pra mim?');
 
--- =====================================
--- FIM DO BANCO
--- =====================================
-
-SHOW TABLES;
+UPDATE usuarios
+SET senha = '$2y$10$bzChUYajQeIMWTZn.0o1juSnWIba9yg3Ji2jVYWN3AT2bGCBOzq2O'
+WHERE email = 'admin@dwdstreet.com';
+DESCRIBE usuarios;
