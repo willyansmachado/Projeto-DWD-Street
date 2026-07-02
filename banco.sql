@@ -1225,4 +1225,31 @@ VALUES
 UPDATE usuarios
 SET senha = '$2y$10$bzChUYajQeIMWTZn.0o1juSnWIba9yg3Ji2jVYWN3AT2bGCBOzq2O'
 WHERE email = 'admin@dwdstreet.com';
-DESCRIBE usuarios;
+
+ALTER TABLE produtos
+ADD estoque INT NOT NULL DEFAULT 0;
+
+ALTER TABLE produtos
+ADD imagem VARCHAR(255) NULL;
+
+CREATE TABLE cupons (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo VARCHAR(50) NOT NULL UNIQUE,
+    valor_desconto DECIMAL(10,2) NOT NULL,
+    tipo VARCHAR(20) NOT NULL DEFAULT 'porcentagem'
+);
+
+INSERT INTO cupons (codigo, valor_desconto, tipo) VALUES ('DWD10', 10.00, 'porcentagem');
+INSERT INTO cupons (codigo, valor_desconto, tipo) VALUES ('FRETE0', 15.00, 'fixo');
+
+CREATE TABLE carrinho (
+    id INT(11) AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT(11) NOT NULL,
+    produto_nome VARCHAR(255) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    imagem VARCHAR(255) NOT NULL,
+    quantidade INT(11) NOT NULL DEFAULT 1,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE carrinho 
+ADD COLUMN peso DECIMAL(10,3) NOT NULL DEFAULT 0.300;
