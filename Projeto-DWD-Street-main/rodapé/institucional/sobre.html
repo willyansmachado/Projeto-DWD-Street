@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - DWD Street</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+<style>
+    /* CORES OFICIAIS DO SITE (BASEADO NAS FOTOS) */
+    :root {
+        --brand-red: #e60000; /* Vermelho do logo DWD STREET */
+        --bg-main: #0a0a0a;
+        --bg-sec: #151515;
+        --bg-card: #111111;
+        --text-light: #ffffff;
+        --text-muted: #aaaaaa;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Montserrat', sans-serif;
+        background: var(--bg-main);
+        color: var(--text-light);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    /* BARRA DE AVISO NO TOPO */
+    .top-bar {
+        background: #111111;
+        color: #ffffff;
+        text-align: center;
+        padding: 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    /* HEADER BRANCO IGUAL AO DO SITE */
+    header {
+        background: #ffffff;
+        padding: 20px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* LOGO DWD (PRETO) STREET (VERMELHO) */
+    .logo {
+        font-size: 26px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: flex;
+        align-items: center;
+    }
+
+    .logo-dwd {
+        color: #ffffff;
+    }
+
+    .logo-street {
+        color: var(--brand-red);
+    }
+
+    /* O BOTÃO DE INÍCIO ISOLADO E DESTACADO */
+    .btn-inicio {
+        color: #000000;
+        text-decoration: none;
+        font-weight: 800;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border: 2px solid #000000;
+        padding: 10px 24px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-inicio:hover {
+        background: var(--brand-red);
+        color: #000000;
+        border-color: var(--brand-red);
+    }
+
+    /* CONTAINER PRINCIPAL */
+    .sobre {
+        max-width: 1000px;
+        margin: auto;
+        padding: 80px 20px;
+    }
+
+    /* TÍTULO DA SEÇÃO */
+    .sobre h1 {
+        text-align: center;
+        font-size: 42px;
+        font-weight: 900;
+        margin-bottom: 60px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .sobre h1 span {
+        color: var(--brand-red);
+    }
+
+    /* TEXTO DA HISTÓRIA */
+    .historia {
+        background: var(--bg-sec);
+        padding: 50px;
+        line-height: 1.8;
+        font-size: 18px;
+        color: var(--text-muted);
+        border-left: 4px solid var(--brand-red);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .historia p {
+        margin-bottom: 25px;
+    }
+
+    .historia p:last-child {
+        margin-bottom: 0;
+        font-weight: 900;
+        font-size: 24px;
+        color: var(--text-light);
+        text-align: center;
+        margin-top: 50px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* FUNDADORES */
+    .fundadores {
+        margin-top: 100px;
+    }
+
+    .fundadores h2 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 800;
+        margin-bottom: 50px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    .cards {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    /* CARDS INDIVIDUAIS */
+    .card {
+        background: var(--bg-card);
+        width: 300px;
+        overflow: hidden;
+        text-align: center;
+        transition: all 0.4s ease;
+        border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        border-color: var(--brand-red);
+        box-shadow: 0 10px 30px rgba(230, 0, 0, 0.15);
+    }
+
+    .card img {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        filter: grayscale(100%);
+        transition: filter 0.5s ease;
+    }
+
+    .card:hover img {
+        filter: grayscale(0%);
+    }
+
+    .card h3 {
+        margin: 25px 0 5px;
+        font-size: 20px;
+        font-weight: 900;
+        color: var(--text-light);
+        text-transform: uppercase;
+    }
+
+    .card p {
+        color: var(--brand-red);
+        margin-bottom: 25px;
+        font-weight: 700;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+
+    /* FOOTER */
+    footer {
+        background: #dfdfdf;
+        text-align: center;
+        padding: 40px 20px;
+        margin-top: 80px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #555;
+        border-top: 2px solid var(--brand-red);
+    }
+
+    /* RESPONSIVIDADE PARA CELULARES */
+    @media (max-width: 768px) {
+        header { flex-direction: column; gap: 20px; padding: 20px; }
+        .sobre h1 { font-size: 32px; }
+        .historia { padding: 30px 20px; font-size: 16px; }
+        .card { width: 100%; max-width: 350px; }
+    }
+</style>
+</head>
+
+<body>
+
+    <div class="top-bar">
+        Entrega rápida em toda Joinville | 10% OFF na primeira compra
+    </div>
+
+    <header>
+        <div class="logo">
+            <span class="logo-dwd">DWD</span>
+            <span class="logo-street">STREET</span>
+        </div>
+        <nav>
+            <a href="" class="btn-inicio">⬅ Voltar ao Início</a>
+        </nav>
+    </header>
+
+    <section class="sobre">
+
+        <h1>Nossa <span>História</span></h1>
+
+        <div class="historia">
+            <p>
+                A DWD Street nasceu da união de três amigos apaixonados pela cultura urbana,
+                moda streetwear e arte de rua. Tudo começou em encontros simples,
+                onde ideias, estilos e sonhos se misturavam entre músicas, skate
+                e inspiração das ruas.
+            </p>
+            <p>
+                O objetivo sempre foi criar roupas que representassem atitude,
+                autenticidade e liberdade. A marca surgiu como uma forma de expressão,
+                trazendo peças modernas, oversized e influenciadas pelo streetwear mundial.
+            </p>
+            <p>
+                Com dedicação e criatividade, a DWD Street foi crescendo e conquistando
+                pessoas que enxergam a moda como identidade. Hoje, a marca representa
+                mais do que roupas: representa um estilo de vida.
+            </p>
+            <p>
+                DWD Street — Vista sua atitude.
+            </p>
+        </div>
+
+        <div class="fundadores">
+            <h2>Fundadores</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="https://via.placeholder.com/280x320/222222/ffffff?text=Eduardo" alt="Eduardo Ribeiro">
+                    <h3>Eduardo Ribeiro</h3>
+                    <p>CEO & Designer</p>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/280x320/222222/ffffff?text=Lucas" alt="Lucas Martins">
+                    <h3>Lucas Martins</h3>
+                    <p>Marketing</p>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/280x320/222222/ffffff?text=Gabriel" alt="Gabriel Costa">
+                    <h3>Gabriel Costa</h3>
+                    <p>Diretor Criativo</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        © 2026 DWD STREET - TODOS OS DIREITOS RESERVADOS
+    </footer>
+
+</body>
+</html>
