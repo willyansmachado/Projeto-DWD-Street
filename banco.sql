@@ -1232,13 +1232,6 @@ ADD estoque INT NOT NULL DEFAULT 0;
 ALTER TABLE produtos
 ADD imagem VARCHAR(255) NULL;
 
-CREATE TABLE cupons (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    codigo VARCHAR(50) NOT NULL UNIQUE,
-    valor_desconto DECIMAL(10,2) NOT NULL,
-    tipo VARCHAR(20) NOT NULL DEFAULT 'porcentagem'
-);
-
 INSERT INTO cupons (codigo, valor_desconto, tipo) VALUES ('DWD10', 10.00, 'porcentagem');
 INSERT INTO cupons (codigo, valor_desconto, tipo) VALUES ('FRETE0', 15.00, 'fixo');
 
@@ -1253,3 +1246,64 @@ CREATE TABLE carrinho (
 );
 ALTER TABLE carrinho 
 ADD COLUMN peso DECIMAL(10,3) NOT NULL DEFAULT 0.300;
+
+-- 1. Cria a coluna que falta no carrinho para parar de dar erro na tela branca
+ALTER TABLE carrinho ADD COLUMN produto_nome VARCHAR(255);
+
+-- 2. Cria a coluna que falta nos cupons para o seu INSERT funcionar
+ALTER TABLE cupons ADD COLUMN valor_desconto DECIMAL(10,2);
+
+ALTER TABLE carrinho ADD COLUMN imagem VARCHAR(255);
+
+ALTER TABLE carrinho ADD COLUMN peso DECIMAL(10,3);
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+INSERT INTO produtos (categoria_id, nome, preco, peso, estoque, ativo) 
+VALUES (1, 'Camiseta Nova DWD', 99.90, 0.30, 10, 1);
+
+ALTER TABLE carrinho DROP FOREIGN KEY carrinho_ibfk_2;
+
+ALTER TABLE pedidos ADD COLUMN endereco VARCHAR(255) AFTER forma_pagamento;
+
+SET SQL_SAFE_UPDATES = 0;
+
+SET @contador = 0;
+
+UPDATE pedidos
+SET codigo = CONCAT('DWD', LPAD((@contador := @contador + 1), 6, '0'))
+ORDER BY id;
+
+SET SQL_SAFE_UPDATES = 1;
+
+UPDATE pedidos
+SET codigo = CASE id
+    WHEN 1 THEN 'DWD000001'
+    WHEN 2 THEN 'DWD000002'
+    WHEN 3 THEN 'DWD000003'
+    WHEN 4 THEN 'DWD000004'
+    WHEN 5 THEN 'DWD000005'
+    WHEN 6 THEN 'DWD000006'
+    WHEN 7 THEN 'DWD000007'
+END
+WHERE id IN (1,2,3,4,5,6,7);
+
+SELECT
+ip.*,
+p.nome
+FROM itens_pedido ip
+LEFT JOIN produtos p
+ON p.id = ip.produto_id
+WHERE ip.pedido_id = 8;
+
+ALTER TABLE produtos 
+ADD genero VARCHAR(20) NOT NULL DEFAULT 'masculino';
+
+ALTER TABLE produtos ADD colecao VARCHAR(20) DEFAULT 'masculino';
+
+ALTER TABLE produtos ADD categoria VARCHAR(50);
+
+UPDATE produtos SET categoria = 'masculino' WHERE id = 1;
+
+ALTER TABLE produtos 
+ADD COLUMN oferta INT DEFAULT 0;
