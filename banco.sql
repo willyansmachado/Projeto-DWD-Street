@@ -1296,6 +1296,16 @@ LEFT JOIN produtos p
 ON p.id = ip.produto_id
 WHERE ip.pedido_id = 8;
 
+ALTER TABLE produtos
+ADD COLUMN genero VARCHAR(20);
+
+UPDATE produtos
+SET genero='Masculino'
+WHERE id=1;
+
+ALTER TABLE produtos
+ADD COLUMN oferta BOOLEAN NOT NULL DEFAULT FALSE;
+
 ALTER TABLE produtos 
 ADD genero VARCHAR(20) NOT NULL DEFAULT 'masculino';
 
@@ -1307,3 +1317,13 @@ UPDATE produtos SET categoria = 'masculino' WHERE id = 1;
 
 ALTER TABLE produtos 
 ADD COLUMN oferta INT DEFAULT 0;
+
+ALTER TABLE carrinho
+ADD COLUMN produto_nome VARCHAR(255) NOT NULL,
+ADD COLUMN imagem VARCHAR(255) DEFAULT NULL;	
+
+ALTER TABLE carrinho
+ADD COLUMN peso DECIMAL(10,2) DEFAULT 0.00;
+
+ALTER TABLE pedidos
+ADD COLUMN endereco VARCHAR(255) NOT NULL;
