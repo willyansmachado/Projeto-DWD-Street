@@ -1,0 +1,20 @@
+Options -MultiViews
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+RewriteRule ^login\.php$ index.php?rota=login [QSA,L]
+RewriteRule ^cadastro\.php$ index.php?rota=cadastro [QSA,L]
+RewriteRule ^logout\.php$ index.php?rota=sair [QSA,L]
+RewriteRule ^carrinho\.php$ index.php?rota=carrinho [QSA,L]
+RewriteRule ^meus_pedidos\.php$ index.php?rota=pedidos [QSA,L]
+RewriteRule ^detalhes_pedido\.php$ index.php?rota=pedido [QSA,L]
+RewriteRule ^(masculino|feminino|infantil|ofertas)\.php$ index.php?rota=catalogo [QSA,L]
+RewriteRule ^montador\.php$ index.php?rota=legado&pagina=montador [QSA,L]
+RewriteRule ^pagamento\.php$ index.php?rota=legado&pagina=pagamento [QSA,L]
+RewriteRule ^obrigado\.php$ index.php?rota=legado&pagina=obrigado [QSA,L]
+RewriteRule ^recuperar_senha\.php$ index.php?rota=legado&pagina=recuperar-senha [QSA,L]
+RewriteRule ^([a-z-]+)/?$ index.php?rota=$1 [QSA,L]
+RewriteRule ^([a-z-]+)/([a-z-]+)/?$ index.php?rota=$1/$2 [QSA,L]

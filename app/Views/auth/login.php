@@ -1,0 +1,3 @@
+<?php use App\Core\View; require BASE_PATH . '/app/Views/layouts/header.php'; ?>
+<main id="conteudo" class="page-shell"><section class="auth-card"><p class="eyebrow">Sua conta</p><h1>Entrar</h1><?php if ($error): ?><p class="form-error"><?= View::escape($error) ?></p><?php endif; ?><form method="post" action="index.php?rota=login"><label>E-mail<input type="email" name="email" required autocomplete="email"></label><label>Senha<input type="password" name="senha" required autocomplete="current-password"></label><button class="button button-primary">Entrar</button></form><p>Novo por aqui? <a href="index.php?rota=cadastro">Crie sua conta.</a></p></section></main>
+<?php require BASE_PATH . '/app/Views/layouts/footer.php'; ?>

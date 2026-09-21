@@ -1,0 +1,26 @@
+@startuml
+left to right direction
+actor Visitante
+actor Cliente
+actor Administrador
+
+rectangle "DWD Street" {
+  usecase "Navegar pelo catálogo" as UC1
+  usecase "Cadastrar / entrar" as UC2
+  usecase "Adicionar ao carrinho" as UC3
+  usecase "Finalizar pedido" as UC4
+  usecase "Consultar pedidos" as UC5
+  usecase "Gerir catálogo" as UC6
+  usecase "Gerir pedidos e clientes" as UC7
+}
+
+Visitante --> UC1
+Visitante --> UC2
+Cliente --> UC1
+Cliente --> UC3
+Cliente --> UC4
+Cliente --> UC5
+Administrador --> UC6
+Administrador --> UC7
+UC4 .> UC3 : <<include>>
+@enduml

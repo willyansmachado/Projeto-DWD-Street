@@ -1,0 +1,19 @@
+@startuml
+hide circle
+class Usuario { +id: int +nome: string +email: string +nivel: string }
+class Produto { +id: int +nome: string +preco: decimal +ativo: bool }
+class Categoria { +id: int +nome: string +slug: string }
+class Pedido { +id: int +total: decimal +status: string }
+class ItemPedido { +quantidade: int +preco_unitario: decimal }
+class ImagemProduto { +imagem: string +principal: bool }
+class Endereco { +cidade: string +estado: string }
+class HomeController
+class ProductModel
+HomeController --> ProductModel
+Categoria "1" -- "0..*" Produto
+Produto "1" -- "0..*" ImagemProduto
+Usuario "1" -- "0..*" Endereco
+Usuario "1" -- "0..*" Pedido
+Pedido "1" -- "1..*" ItemPedido
+Produto "1" -- "0..*" ItemPedido
+@enduml

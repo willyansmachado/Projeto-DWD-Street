@@ -1,0 +1,3 @@
+<?php use App\Core\View; require BASE_PATH . '/app/Views/layouts/header.php'; ?>
+<main id="conteudo" class="page-shell"><div class="page-heading"><p class="eyebrow">Histórico</p><h1>Meus pedidos</h1></div><?php if (!$orders): ?><p class="empty-state">Você ainda não fez pedidos.</p><?php else: ?><div class="order-list"><?php foreach ($orders as $order): ?><a class="order-item" href="index.php?rota=pedido&amp;id=<?= (int) $order['id'] ?>"><span>Pedido #<?= (int) $order['id'] ?></span><span><?= View::escape($order['status']) ?></span><strong>R$ <?= number_format((float) $order['total'], 2, ',', '.') ?></strong></a><?php endforeach; ?></div><?php endif; ?></main>
+<?php require BASE_PATH . '/app/Views/layouts/footer.php'; ?>
